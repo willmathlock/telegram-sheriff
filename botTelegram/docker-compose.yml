@@ -7,8 +7,8 @@ services:
     restart: always
     build: .
     environment:
-      - TELEGRAM_TOKEN=CONFIGURAR-TOKEN-AQUI
-      - BASE_API_URL=CONFIGURAR-URL-AQUI
+      - TELEGRAM_TOKEN=token-aqui
+      - BASE_API_URL=1
     working_dir: /bot-telegram
     volumes:
       - /home/pi/telegram-sheriff/botTelegram/src:/bot-telegram
