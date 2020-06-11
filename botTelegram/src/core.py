@@ -5,7 +5,10 @@ from conf.settings import BASE_API_URL, TELEGRAM_TOKEN
 
 def tocaAudio(bot, update, file):
     arq = 'conf/audios' + file
-    bot.send_audio()
+    bot.send_audio(
+        chat_id = update.message.chat_id,
+        audio = open(arq)
+    )
 
 def bfa(bot, update):
     response_message = "ACABA LOGO BFA!"
@@ -71,13 +74,7 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(
-        CommandHandler('start', start)
-    )
-    dispatcher.add_handler(
         CommandHandler('http', http_cats, pass_args=True)
-    )
-    dispatcher.add_handler(
-        CommandHandler('bfa', bfa)
     )
     dispatcher.add_handler(
         CommandHandler('amanha', amanha)
