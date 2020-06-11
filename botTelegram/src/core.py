@@ -3,11 +3,20 @@ from threading import Timer
 
 from conf.settings import BASE_API_URL, TELEGRAM_TOKEN
 
-def tocaAudio(bot, update, file):
-    arq = 'conf/audios' + file
+def tocaAudio(bot, update, name):
+    arq = "conf/audios/" + name + ".mp3"
+
     bot.send_audio(
         chat_id = update.message.chat_id,
-        audio = open(arq)
+        audio = open(arq, 'rb')
+    )
+
+def mandaGif(bot, update, name):
+    arq = "conf/img/" + name + ".gif"
+    bot.sendAnimation(
+        chat_id = update.message.chat_id,
+        #animation = 'https://pa1.narvii.com/7136/475c22b4cb2315dcdf910c54e3a8d38d2bb93cfbr1-220-166_hq.gif'
+        animation = open(arq, 'rb')
     )
 
 def bfa(bot, update):
@@ -25,46 +34,25 @@ def unknown(bot, update):
     )
 
 def amanha(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/amanha.mp3', 'rb')
-    )
+    tocaAudio(bot, update, 'amanha')
 
 def pedra(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/caralhovamosfazerpedra.mp3', 'rb')
-    )
+    tocaAudio(bot, update, 'caralhovamosfazerpedra')
 
 def fodo(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/fodo.mp3', 'rb')
-    )
+    tocaAudio(bot, update, 'fodo')
 
 def olha(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/olha.mp3', 'rb')
-    )
+    tocaAudio(bot, update, 'olha')
 
 def oralzinho(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/oralzinho.mp3', 'rb')   
-    )
+    tocaAudio(bot, update, 'oralziniho')
 
 def machista(bot, update):
-    bot.send_audio(
-        chat_id = update.message.chat_id,
-        audio = open('conf/audios/machista.mp3', 'rb'), 
-    )
+    tocaAudio(bot, update, 'machista')
     t = Timer(0.5, 
-        bot.sendAnimation(
-        chat_id = update.message.chat_id,
-        #animation = 'https://pa1.narvii.com/7136/475c22b4cb2315dcdf910c54e3a8d38d2bb93cfbr1-220-166_hq.gif'
-        animation = open('conf/img/machista.gif', 'rb')
-    ))
+        mandaGif(bot, update, 'machista')
+    )
     t.start()
     
 
@@ -73,9 +61,6 @@ def main():
 
     dispatcher = updater.dispatcher
 
-    dispatcher.add_handler(
-        CommandHandler('http', http_cats, pass_args=True)
-    )
     dispatcher.add_handler(
         CommandHandler('amanha', amanha)
     )
