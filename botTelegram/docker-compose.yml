@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  bot-telegram:
+    container_name: bot-telegram
+    image: python:3.8.3-alpine
+    restart: always
+    build: .
+    environment:
+      - TELEGRAM_TOKEN=CONFIGURAR-TOKEN-AQUI
+      - BASE_API_URL=CONFIGURAR-URL-AQUI
+    working_dir: /bot-telegram
+    volumes:
+      - /home/pi/telegram-sheriff/botTelegram/src:/bot-telegram
+    command: "python3 -u core.py"
