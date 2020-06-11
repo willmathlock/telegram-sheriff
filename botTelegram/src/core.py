@@ -3,6 +3,7 @@ from threading import Timer
 
 from conf.settings import BASE_API_URL, TELEGRAM_TOKEN
 from conf.emoji import turtle_emoji
+from conf.cotacao import busca_cotacao
 
 def tocaAudio(bot, update, name):
     arq = "conf/audios/" + name + ".mp3"
@@ -66,6 +67,11 @@ def milagre(bot, update):
 def tururu(bot, update):
     tocaAudio(bot, update, 'tururu')
 
+def cotacao(bot, update):
+    bot.send_message(
+        chat_id = update.message.chat_id,
+        text = busca_cotacao()
+    )
 
 def tosco(bot, update):
     tocaAudio(bot, update, 'tosco')
@@ -77,8 +83,6 @@ def turtle(bot, update):
         text = turtle_emoji()
     )
 
-
-
 def main():
     updater = Updater(token=TELEGRAM_TOKEN)
 
@@ -89,6 +93,9 @@ def main():
     )
     dispatcher.add_handler(
         CommandHandler('pedra', pedra)
+    )
+    dispatcher.add_handler(
+        CommandHandler('cotacao', cotacao)
     )
     dispatcher.add_handler(
         CommandHandler('fodo', fodo)
