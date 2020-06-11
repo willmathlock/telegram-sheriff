@@ -2,6 +2,7 @@ from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 from threading import Timer
 
 from conf.settings import BASE_API_URL, TELEGRAM_TOKEN
+from conf.emoji import turtle_emoji
 
 def tocaAudio(bot, update, name):
     arq = "conf/audios/" + name + ".mp3"
@@ -15,8 +16,14 @@ def mandaGif(bot, update, name):
     arq = "conf/img/" + name + ".gif"
     bot.sendAnimation(
         chat_id = update.message.chat_id,
-        #animation = 'https://pa1.narvii.com/7136/475c22b4cb2315dcdf910c54e3a8d38d2bb93cfbr1-220-166_hq.gif'
         animation = open(arq, 'rb')
+    )
+
+def mandaImg(bot, update, name):
+    arq = "conf/img" + name + ".png"
+    bot.sendPhoto(
+        chat_id = update.message.chat_id,
+        photo = open(arq, 'rb')
     )
 
 def bfa(bot, update):
@@ -50,11 +57,27 @@ def oralzinho(bot, update):
 
 def machista(bot, update):
     tocaAudio(bot, update, 'machista')
-    t = Timer(0.5, 
-        mandaGif(bot, update, 'machista')
+    mandaGif(bot, update, 'machista')
+
+def milagre(bot, update):
+    tocaAudio(bot, update, 'milagre')
+    mandaGif(bot, update, 'milagre')
+
+def tururu(bot, update):
+    tocaAudio(bot, update, 'tururu')
+
+
+def tosco(bot, update):
+    tocaAudio(bot, update, 'tosco')
+
+def turtle(bot, update):
+    tocaAudio(bot, update, 'turtle')
+    bot.send_message(
+        chat_id = update.message.chat_id,
+        text = turtle_emoji()
     )
-    t.start()
-    
+
+
 
 def main():
     updater = Updater(token=TELEGRAM_TOKEN)
@@ -79,6 +102,19 @@ def main():
     dispatcher.add_handler(
         CommandHandler('machista', machista)
     )
+    dispatcher.add_handler(
+        CommandHandler('milagre', milagre)
+    )
+    dispatcher.add_handler(
+        CommandHandler('tururu', tururu)
+    )
+    dispatcher.add_handler(
+        CommandHandler('tosco', tosco)
+    )
+    dispatcher.add_handler(
+        CommandHandler('turtle', turtle)
+    )
+
 
     dispatcher.add_handler(
         MessageHandler(Filters.command, unknown)
