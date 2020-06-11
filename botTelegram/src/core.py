@@ -84,7 +84,7 @@ def turtle(bot, update):
     )
 
 def main():
-    updater = Updater(token=TELEGRAM_TOKEN)
+    updater = Updater(token=TELEGRAM_TOKEN, use_context=True)
 
     dispatcher = updater.dispatcher
 
