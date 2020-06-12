@@ -87,6 +87,9 @@ def turtle(bot, update):
         text = turtle_emoji()
     )
 
+def heart(bot, update):
+    tocaAudio(bot, update, 'heart')
+
 def main():
     updater = Updater(token=TELEGRAM_TOKEN)
 
@@ -127,6 +130,9 @@ def main():
     )
     dispatcher.add_handler(
         CommandHandler('skidaddle', skidaddle)
+    )
+    dispatcher.add_handler(
+        CommandHandler('heart', heart)
     )
 
 
