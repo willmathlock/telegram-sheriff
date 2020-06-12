@@ -73,6 +73,10 @@ def cotacao(bot, update):
         text = busca_cotacao()
     )
 
+def skidaddle(bot, update):
+    tocaAudio(bot, update, 'skidaddle')
+    mandaGif(bot, update, 'skidaddle')
+
 def tosco(bot, update):
     tocaAudio(bot, update, 'tosco')
 
@@ -120,6 +124,9 @@ def main():
     )
     dispatcher.add_handler(
         CommandHandler('turtle', turtle)
+    )
+    dispatcher.add_handler(
+        CommandHandler('skidaddle', skidaddle)
     )
 
 
